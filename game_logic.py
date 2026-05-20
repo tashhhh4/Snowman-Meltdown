@@ -1,4 +1,5 @@
 import random
+from console import get_single_letter
 
 
 def get_random_word(words):
@@ -38,7 +39,7 @@ def run_game(snowman_stages, word_list):
     display_game_state(snowman_stages, mistakes, secret_word, guessed_letters)
 
     while True:
-        guess = input("Guess a letter: ").lower()
+        guess = get_single_letter("Guess a letter: ")
         print("You guessed:", guess)
 
         # Handle guess
