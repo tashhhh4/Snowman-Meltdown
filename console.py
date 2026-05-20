@@ -13,3 +13,11 @@ def get_single_letter(prompt):
             continue
 
         return user_input
+
+
+def get_y_n(prompt):
+    """ Gets the answer to a yes or no question. """
+    user_input = input(prompt)
+    if user_input.lower() in ["y", "yes"]:
+        return True
+    return False
