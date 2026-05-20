@@ -1,5 +1,6 @@
 import random
-from console import get_single_letter
+import ascii_art
+from console import get_single_letter, get_choice
 
 
 def get_random_word(words):
@@ -22,6 +23,24 @@ def display_game_state(stages, mistakes, secret_word, guessed_letters):
     print("\n")
 
 
+def print_game_title():
+    """ Prints the game title. """
+    print("Welcome to Snowman Meltdown!")
+
+
+def choose_difficulty():
+    difficulty_level = {
+        "EASY": ascii_art.STAGES_EASY,
+        "MEDIUM": ascii_art.STAGES_MEDIUM,
+        "HARD": ascii_art.STAGES_HARD,
+
+    }
+    choices = list(difficulty_level.keys())
+    user_choice = get_choice(f"Choose difficulty (1-{len(choices)}): ", choices)
+
+    return difficulty_level[user_choice]
+
+
 def run_game(snowman_stages, word_list):
     """ Runs the display function and gets the next letter input from the user.
         snowman_stages: A list which defines the game by providing ASCII art at every element,
@@ -33,8 +52,6 @@ def run_game(snowman_stages, word_list):
     guessed_letters = []
     mistakes = 0
     max_mistakes = len(snowman_stages) - 1
-
-    print("Welcome to Snowman Meltdown!")
 
     display_game_state(snowman_stages, mistakes, secret_word, guessed_letters)
 

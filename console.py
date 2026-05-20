@@ -21,3 +21,22 @@ def get_y_n(prompt):
     if user_input.lower() in ["y", "yes"]:
         return True
     return False
+
+
+def get_choice(prompt, choices):
+    """ Displays a list of choices, numbered.
+    Prompts the user to input a number value,
+    and returns the choice as a string value
+    prompt: str
+    choices: [str]
+    """
+    for i, choice in enumerate(choices):
+        print(f"{i + 1}: {choice}")
+    while True:
+        try:
+            user_input = int(input(prompt))
+            return choices[user_input - 1]
+        except ValueError:
+            print("Invalid input, try again.")
+        except IndexError:
+            print("Invalid input, try again.")
