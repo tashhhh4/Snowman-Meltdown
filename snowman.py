@@ -7,29 +7,29 @@ import random
 STAGES = [
      # Stage 0: Full snowman
      """
-      ___  
-     /___\\ 
-     (o o) 
-     ( : ) 
-     ( : ) 
+      ___
+     /___\\
+     (o o)
+     ( : )
+     ( : )
      """,
      # Stage 1: Bottom part starts melting
      """
-      ___  
-     /___\\ 
-     (o o) 
-     ( : ) 
+      ___
+     /___\\
+     (o o)
+     ( : )
      """,
      # Stage 2: Only the head remains
      """
-      ___  
-     /___\\ 
-     (o o) 
+      ___
+     /___\\
+     (o o)
      """,
      # Stage 3: Snowman completely melted
      """
-      ___  
-     /___\\ 
+      ___
+     /___\\
      """
  ]
 
@@ -63,14 +63,37 @@ def play_game():
     """ Runs the display function and gets the next letter input from the user.
     """
     secret_word = get_random_word()
+    unique_letters = set(secret_word)
     guessed_letters = []
     mistakes = 0
+    MAX_MISTAKES = 3
 
     print("Welcome to Snowman Meltdown!")
+
     display_game_state(mistakes, secret_word, guessed_letters)
-    
-    guess = input("Guess a letter: ").lower()
-    print("You guessed:", guess)
-    
+
+    while True:
+        guess = input("Guess a letter: ").lower()
+        print("You guessed:", guess)
+
+        # Handle guess
+        if guess in secret_word:
+            if guess not in guessed_letters:
+                guessed_letters.append(guess)
+        else:
+            mistakes += 1
+
+        # End conditions
+        if len(guessed_letters) == len(unique_letters):
+            print("You win!")
+            break
+
+        if mistakes > MAX_MISTAKES:
+            print("You lose!")
+            break        
+
+        display_game_state(mistakes, secret_word, guessed_letters)
+
+
 if __name__ == "__main__":
     play_game()
