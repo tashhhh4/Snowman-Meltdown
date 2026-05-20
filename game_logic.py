@@ -53,7 +53,10 @@ def run_game(snowman_stages, word_list):
     mistakes = 0
     max_mistakes = len(snowman_stages) - 1
 
-    display_game_state(snowman_stages, mistakes, secret_word, guessed_letters)
+    def show_game():
+        display_game_state(snowman_stages, mistakes, secret_word, guessed_letters)
+
+    show_game()
 
     while True:
         guess = get_single_letter("Guess a letter: ")
@@ -68,11 +71,13 @@ def run_game(snowman_stages, word_list):
 
         # End conditions
         if len(guessed_letters) == len(unique_letters):
+            show_game()
             print("You win!")
             break
 
         if mistakes > max_mistakes:
+            print("Solution:", secret_word)
             print("You lose!")
             break        
 
-        display_game_state(snowman_stages, mistakes, secret_word, guessed_letters)
+        show_game()
